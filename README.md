@@ -1,6 +1,6 @@
 # Yuri Music
 
-Player de música para **Windows e Android**, versão **0.7.0**, com interface minimalista e temas personalizados.
+Player de música para **Windows e Android**, versão **0.7.1**, com interface minimalista e temas personalizados.
 
 ## Baixar
 
@@ -84,3 +84,7 @@ No perfil de um artista, toque em **Seguir artista**. O catálogo inicial é sal
 16 testes JavaScript, 11 verificações nativas do atualizador e um ensaio de fechamento/substituição/reabertura com aplicativo de teste passaram. Os avisos de uma versão futura e de um lançamento foram simulados na interface; consulta real de releases e perfil de artista também foram verificadas. A instalação Android precisa ser validada em aparelho físico.
 
 Veja [como preparar as próximas releases](docs/RELEASES.md). Não remova o arquivo de checksums nem troque a assinatura do Android.
+
+## Discord: capa da música — 0.7.1
+
+No Windows, a presença envia a capa pública da faixa atual. Sem capa válida, o Discord mantém a imagem da aplicação. Não requer novo token ou alteração no Application ID. Foram testadas validação e transmissão do payload em IPC isolado; a renderização final e o cache dependem do cliente Discord.
