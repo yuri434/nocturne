@@ -40,3 +40,6 @@ input[type=range]{appearance:none;-webkit-appearance:none;background:transparent
 #search #header-home{flex:0 0 44px;width:44px;min-width:44px;padding:10px;background:var(--raised);color:var(--accent-readable);border:1px solid var(--border);border-radius:50%}#search #header-home:hover,#search #header-home.active{border-color:var(--accent-readable);background:var(--hover)}#search #header-home::before{width:20px;height:20px}
 
 .home-card.active,.song.active{box-shadow:inset 0 0 0 2px var(--accent);border-radius:0}.song.active{border-color:var(--accent)}
+
+/* Track titles follow the selected accent on pointer hover and keyboard focus. */
+.song:hover .song-play strong,.song .song-play:focus-visible strong,.home-card:hover .home-open strong,.home-card .home-open:focus-visible strong{color:var(--accent-readable)}
