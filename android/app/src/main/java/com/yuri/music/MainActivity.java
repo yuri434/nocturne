@@ -16,8 +16,10 @@ public class MainActivity extends Activity{
  JSONObject dispatch(JSONObject body)throws Exception{String op=body.getString("op");switch(op){
  case "update-check":return updates.check();
  case "update-install":return updates.install(body.getString("version"));
- case "search":case "lyrics":case "album":case "artist":case "artist-tracks":return python(body);
+ case "search":case "lyrics":case "album":case "artist":case "artist-tracks":case "radio":return python(body);
  case "stream":JSONObject result=python(body);if(!result.has("error")){String url=result.getString("url");URL parsed=new URL(url);if(!parsed.getProtocol().equals("https")||!parsed.getHost().endsWith(".googlevideo.com"))throw new IOException("Endereço inválido.");if(streams.size()>12)streams.clear();String token=UUID.randomUUID().toString();streams.put(token,url);result.put("url","https://yuri.local/stream/"+token);}return result;
+ case "session-load":return new JSONObject().put("data",read(new File(root,"playback.json")));
+ case "session-save":String session=body.getString("data");if(session.length()>2*1024*1024)throw new IOException("Sessão muito grande.");new JSONObject(session);write(new File(root,"playback.json"),session);return ok();
  case "state-load":String saved=read(new File(root,"library.json"));if(saved!=null)try{new JSONObject(saved);}catch(Exception error){saved=read(new File(root,"library.json.bak"));}return new JSONObject().put("data",saved==null?JSONObject.NULL:saved);
  case "state-save":write(new File(root,"library.json"),checkLibrary(body.getString("data")));return ok();
  case "preferences":cacheMB=Math.max(0,Math.min(256,body.optInt("cacheMB",64)));trimCache();return ok();

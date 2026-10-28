@@ -6,7 +6,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 def thumbnail(item):
-    return (item.get('thumbnails') or [{}])[-1].get('url', '')
+    images=item.get('thumbnails') or item.get('thumbnail') or []
+    return max(images,key=lambda i:(i.get('width') or 0)*(i.get('height') or 0),default={}).get('url','')
 
 def track(item, album=None, artists=None):
     people = item.get('artists') or artists or []
@@ -15,7 +16,7 @@ def track(item, album=None, artists=None):
             'artists': ', '.join(p.get('name', '') for p in people),
             'artistId': next((p['id'] for p in people if p.get('id')), ''),
             'albumId': release.get('id', ''), 'albumName': release.get('name', ''),
-            'duration': item.get('duration', ''), 'thumbnail': thumbnail(item) or release.get('thumbnail', '')}
+            'duration': item.get('duration') or item.get('length', ''), 'thumbnail': thumbnail(item) or release.get('thumbnail', '')}
 
 def tracks(items, album=None, artists=None):
     return [track(item, album, artists) for item in items if re.fullmatch(r'[A-Za-z0-9_-]{11}', item.get('videoId') or '')]
@@ -67,6 +68,13 @@ def handle(request):
                 'songs': tracks((artist.get('songs') or {}).get('results', []), artists=people),
                 'songsId': (artist.get('songs') or {}).get('browseId', ''),
                 'collections': [collection(item, 'album') for item in releases]}
+    if operation == 'radio':
+        from ytmusicapi import YTMusic
+        video = request.get('id', '')
+        if not isinstance(video, str) or not re.fullmatch(r'[A-Za-z0-9_-]{11}', video):
+            raise ValueError('Identificador inválido.')
+        result = YTMusic(language='en', location='BR').get_watch_playlist(videoId=video, radio=True, limit=25)
+        return {'songs': tracks(result.get('tracks', []))[:25]}
     if operation == 'lyrics':
         import requests
         title = str(request.get('title', '')).strip()[:300]

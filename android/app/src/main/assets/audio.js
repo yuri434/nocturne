@@ -8,7 +8,7 @@ export class Player {
   elements.forEach((audio,slot)=>{
    audio.crossOrigin='anonymous';
    audio.addEventListener('timeupdate',()=>{if(slot===this.slot)this.tick();});
-   for(const event of ['loadedmetadata','durationchange','seeked'])audio.addEventListener(event,()=>{if(slot===this.slot&&this.current&&this.loadedKeys[slot]===this.current.key)this.changed('metadata');});
+   for(const event of ['loadedmetadata','durationchange','seeked'])audio.addEventListener(event,()=>{if(slot===this.slot&&this.current&&this.loadedKeys[slot]===this.current.key){if(this.pendingResume&&this.pendingResume.key===this.current.key&&this.pendingResume.generation===this.generation&&Number.isFinite(audio.duration)&&audio.duration>0){const resume=this.pendingResume;this.pendingResume=null;audio.currentTime=Math.min(resume.position,Math.max(0,audio.duration-.1));this.resumePosition=0;}this.changed('metadata');}});
    audio.addEventListener('ended',()=>{if(slot===this.slot&&!this.mix&&!this.transition)this.next(true);});
    for(const event of ['play','pause'])audio.addEventListener(event,()=>{if(slot===this.slot)this.changed('state');});
    audio.addEventListener('error',()=>{if(slot===this.slot&&audio.getAttribute('src')&&!this.loading){this.loadedKeys[slot]=null;this.error(Error('Áudio indisponível ou endereço expirado. Selecione a faixa novamente.'));this.changed('state');}});
@@ -21,10 +21,10 @@ export class Player {
  update(){const settings=this.settings();if(this.leveler){const t=this.context.currentTime;for(const [key,value] of Object.entries({threshold:settings.normalize?-18:0,knee:12,ratio:settings.normalize?3:1,attack:.015,release:.35}))this.leveler[key].setTargetAtTime(value,t,.06);}if(this.master){this.elements.forEach(audio=>audio.volume=1);this.master.gain.setTargetAtTime(this.muted?0:settings.volume*this.norm,this.context.currentTime,.06);}else this.elements.forEach(audio=>audio.volume=this.muted?0:settings.volume);this.graphs.forEach(graph=>graph.filters.forEach((filter,i)=>filter.gain.setTargetAtTime(settings.eq[i],this.context.currentTime,.04)));}
  cancelMix(){this.fadeEpoch++;this.transition=null;if(this.mix!==null){clearInterval(this.mix);this.mix=null;}if(this.context)this.graphs.forEach((graph,i)=>{graph.gain.gain.cancelScheduledValues(this.context.currentTime);graph.gain.gain.value=i===this.slot?1:0;});this.elements.forEach((audio,i)=>{if(i!==this.slot)audio.pause();});}
  invalidatePrefetch(){this.prefetchEpoch++;this.prefetching=null;this.prepared=null;this.cancelMix();this.clear(1-this.slot);}
- play(index){
+ play(index,position=0){
   if(index<0||index>=this.queue.length)return Promise.resolve();
   const generation=++this.generation;this.invalidatePrefetch();this.loading=true;this.wantPlaying=true;this.index=index;
-  const track=this.current,slot=this.slot;this.clear(slot);this.changed('track');
+  const track=this.current,slot=this.slot;this.resumePosition=Number.isFinite(position)?Math.max(0,position):0;this.pendingResume=this.resumePosition>0?{key:track.key,position:this.resumePosition,generation}:null;this.clear(slot);this.changed('track');
   this.loadTask=(async()=>{try{
    await this.graph();
    for(let retry=0;retry<2;retry++){try{
@@ -37,11 +37,11 @@ export class Player {
   }catch(error){if(generation===this.generation){this.clear(slot);this.loading=false;this.wantPlaying=false;this.error(error.name==='NotSupportedError'?Error('O servidor recusou o áudio. Tente selecionar a faixa novamente.'):error);this.changed('state');}}})();
   return this.loadTask;
  }
- setQueue(list,index=0){this.queue=list.map(track=>({...track,key:crypto.randomUUID()}));if(!this.queue.length){this.generation++;this.loading=false;this.wantPlaying=false;this.invalidatePrefetch();this.clear(this.slot);this.index=-1;this.changed('state');return Promise.resolve();}return this.play(index);}
- async resume(){this.wantPlaying=true;if(this.loading)return this.loadTask;if(!this.current){if(this.queue.length)return this.play(0);return;}if(this.loadedKeys[this.slot]!==this.current.key||!this.audio.getAttribute('src'))return this.play(this.index);try{await this.context?.resume();if(!this.wantPlaying)return;await this.audio.play();if(!this.wantPlaying)this.audio.pause();}catch(error){this.error(error);}}
+ setQueue(list,index=0,options={}){this.queueMode=options.album?'album':'general';this.resumePosition=0;this.pendingResume=null;this.queue=list.map(track=>({...track,key:crypto.randomUUID()}));if(!this.queue.length){this.generation++;this.loading=false;this.wantPlaying=false;this.invalidatePrefetch();this.clear(this.slot);this.index=-1;this.changed('state');return Promise.resolve();}return this.play(index);}
+ async resume(){this.wantPlaying=true;if(this.loading)return this.loadTask;if(!this.current){if(this.queue.length)return this.play(0);return;}if(this.loadedKeys[this.slot]!==this.current.key||!this.audio.getAttribute('src'))return this.play(this.index,this.resumePosition||0);try{await this.context?.resume();if(!this.wantPlaying)return;await this.audio.play();if(!this.wantPlaying)this.audio.pause();}catch(error){this.error(error);}}
  pause(){this.wantPlaying=false;this.cancelMix();this.audio.pause();this.changed('state');}
  toggle(){if(this.loading||!this.audio.paused){this.pause();return Promise.resolve();}return this.resume();}
- next(ended=false){if(this.loading)return;const index=nextIndex(this.queue.length,this.index,this.settings(),ended);if(index>=0)return this.play(index);this.pause();}
+ async next(ended=false){if(this.loading)return;let index=nextIndex(this.queue.length,this.index,this.settings(),ended);if(index>=0)return this.play(index);const generation=this.generation,queue=this.queue;if(this.radioFill){await this.radioFill();if(generation!==this.generation||queue!==this.queue)return;index=nextIndex(this.queue.length,this.index,this.settings(),ended);if(index>=0){if(!this.wantPlaying)return;return this.play(index);}}this.pause();}
  previous(){if(this.audio.currentTime>3){this.cancelMix();this.audio.currentTime=0;return;}if(!this.loading)return this.play(Math.max(0,this.index-1));}
  async tick(){
   const audio=this.audio;this.progress(audio);if(!this.current||this.loading||audio.paused||!Number.isFinite(audio.duration))return;

@@ -1,6 +1,6 @@
 # Yuri Music
 
-Player de música para **Windows e Android**, versão **0.7.9**, com interface minimalista e temas personalizados.
+Player de música para **Windows e Android**, versão **0.8.0**, com interface minimalista e temas personalizados.
 
 ## Baixar
 
@@ -128,3 +128,13 @@ Seleção, cores, validação do backup e layout verificados em WebView em 1280 
 ## Destaque da linha inteira ao passar o mouse — 0.7.9
 
 Hover nas linhas e cards aplica a mesma moldura e fundo da faixa atual, usando a cor secundária do tema. Ao sair, o destaque transitório desaparece e a faixa atual permanece marcada. Também disponível ao focar os controles pelo teclado. Verificados estilos calculados em simulação controlada de hover no WebView, mudança de tema e preservação da seleção de reprodução.
+
+## Janela integrada, última reprodução e rádio — 0.8.0
+
+Windows remove a barra branca e integra minimizar/maximizar/fechar ao topo do app, com regiões de arraste e redimensionamento. Maximização respeita a área de trabalho e maximizar o miniplayer retorna à interface completa.
+
+A sessão salva faixa atual, ponto e até 500 músicas da fila em arquivo separado e armazenamento local. Ao reabrir, a faixa aparece pausada; ao tocar, o áudio é resolvido novamente e retorna ao ponto salvo após carregar os metadados. Grava a cada 5 segundos e em mudanças de reprodução/visibilidade; no fechamento normal do Windows captura o ponto final. Encerramento forçado pode perder os últimos segundos. A sessão não entra no backup da biblioteca.
+
+Continuação automática ativada por padrão fora de álbuns: perto do fim da fila, consulta a rádio da faixa no YouTube Music, embaralha recomendações relacionadas, remove IDs já na fila e adiciona até 15. Não altera filas de álbum nem repetição; opção em Configurações → Som. Gênero/estilo seguem as recomendações disponíveis da fonte. Sem rede ou sugestões novas, mantém a fila existente.
+
+Validação: 26 testes JS aprovados; janela sem borda, controles, maximização na área útil e miniplayer verificados em instância isolada; reinicialização recuperou faixa pausada em 0:43; motor empacotado retornou 25 recomendações reais com duração e capa. Windows e APK compilados; assinatura Android validada. Sem teste em aparelho Android físico.
