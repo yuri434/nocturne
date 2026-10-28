@@ -5,11 +5,11 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 static class ThemeIcon{
- public static Icon Create(string source,string color,out MemoryStream storage){
+ public static Icon Create(string source,string color,out MemoryStream storage,bool recolorAll=false,bool original=false){
   var accent=ColorTranslator.FromHtml(color);var frames=new List<byte[]>();int[] sizes={16,24,32,48,64,256};
   using(var image=new Bitmap(source))using(var tinted=new Bitmap(image.Width,image.Height,PixelFormat.Format32bppArgb)){
-   int maximum=1;for(int y=0;y<image.Height;y++)for(int x=0;x<image.Width;x++)maximum=Math.Max(maximum,image.GetPixel(x,y).G);
-   for(int y=0;y<image.Height;y++)for(int x=0;x<image.Width;x++){var pixel=image.GetPixel(x,y);if(pixel.G>pixel.R*1.2&&pixel.G>pixel.B*1.2){double factor=pixel.G/(double)maximum;pixel=Color.FromArgb(pixel.A,(int)(accent.R*factor),(int)(accent.G*factor),(int)(accent.B*factor));}tinted.SetPixel(x,y,pixel);}
+   int maximum=1;for(int y=0;y<image.Height;y++)for(int x=0;x<image.Width;x++){var p=image.GetPixel(x,y);maximum=Math.Max(maximum,recolorAll?Math.Max(p.R,Math.Max(p.G,p.B)):p.G);}
+   for(int y=0;y<image.Height;y++)for(int x=0;x<image.Width;x++){var pixel=image.GetPixel(x,y);if(!original&&(recolorAll||(pixel.G>pixel.R*1.2&&pixel.G>pixel.B*1.2))){double factor=(recolorAll?Math.Max(pixel.R,Math.Max(pixel.G,pixel.B)):pixel.G)/(double)maximum;pixel=Color.FromArgb(pixel.A,(int)(accent.R*factor),(int)(accent.G*factor),(int)(accent.B*factor));}tinted.SetPixel(x,y,pixel);}
    foreach(int size in sizes)using(var frame=new Bitmap(size,size,PixelFormat.Format32bppArgb))using(var graphics=Graphics.FromImage(frame))using(var encoded=new MemoryStream())using(var dib=new BinaryWriter(encoded,System.Text.Encoding.UTF8,true)){
     graphics.CompositingMode=CompositingMode.SourceCopy;graphics.InterpolationMode=InterpolationMode.NearestNeighbor;graphics.PixelOffsetMode=PixelOffsetMode.Half;graphics.DrawImage(tinted,new Rectangle(0,0,size,size));graphics.Flush();
     dib.Write((uint)40);dib.Write(size);dib.Write(size*2);dib.Write((ushort)1);dib.Write((ushort)32);dib.Write((uint)0);dib.Write(size*size*4);dib.Write(0);dib.Write(0);dib.Write((uint)0);dib.Write((uint)0);

@@ -5,7 +5,7 @@ import {palette} from './palette.js';
 import './icons.js';
 import {setupMobile} from './mobile.js';
 let mobileUI;
-import {ThemeLogo} from './logo.js';
+import {ThemeLogo,setupHeadPicker} from './logo.js';
 import {Visualizer} from './visualizer.js';
 import {defaults,fresh,validate,merge,song,move,parseLRC} from './model.js';
 import {Player} from './audio.js';
@@ -59,7 +59,8 @@ async function openArtist(s){const data=await metadata(s);if(!data.artistId)thro
 function dockVisualizer(to=page){const box=document.querySelector('.visualizer-box');if(!box)return;if(innerWidth<=950&&to==='now')document.querySelector('.now-layout>div:first-child').append(box);else document.querySelector('.now-sidebar').insertBefore(box,$('side-now'));visualizer.update();}
 window.addEventListener('resize',()=>dockVisualizer());
 
-function applyAccent(color){if(!/^#[0-9a-f]{6}$/i.test(color))return;document.documentElement.style.setProperty('--accent',color);applyPalette(settings.primary,color);themeLogo.paint(color);if(appliedAccent!==color){appliedAccent=color;call({op:'accent',color}).catch(()=>{});}}
+const headPicker=setupHeadPicker({getSettings:()=>settings,save:setSetting});
+function applyAccent(color){if(!/^#[0-9a-f]{6}$/i.test(color))return;document.documentElement.style.setProperty('--accent',color);applyPalette(settings.primary,color);const logoColor=settings.logoMode==='custom'?settings.logoColor:color,logoKey=[settings.logoHead,settings.logoMode,logoColor].join('|');themeLogo.paint(logoColor,settings.logoHead,settings.logoMode==='original');if(appliedAccent!==logoKey){appliedAccent=logoKey;call({op:'accent',color:logoColor,head:settings.logoHead,original:settings.logoMode==='original'}).catch(()=>{});}}
 
 mobileUI=setupMobile({$,player,library:()=>library,page:()=>page,playlist:()=>playlistId,navigate:(to,id)=>navigate(to,id),toast,createPlaylist,openArtist,openAlbum});
 

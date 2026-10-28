@@ -1,6 +1,6 @@
 # Yuri Music
 
-Player de música para **Windows e Android**, versão **0.7.7**, com interface minimalista e temas personalizados.
+Player de música para **Windows e Android**, versão **0.7.8**, com interface minimalista e temas personalizados.
 
 ## Baixar
 
@@ -118,3 +118,9 @@ Discord usa duração finita do áudio, com alternativa pela duração dos metad
 ## Destaque dos nomes ao passar o mouse — 0.7.7
 
 Nomes de músicas nas listas e cards da Início usam a cor secundária legível ao passar o mouse. O foco pelo teclado recebe o mesmo destaque. Verificados a regra CSS e sua aplicação de cor com simulação controlada no WebView oculto.
+
+## Cabeças personalizáveis — 0.7.8
+
+Clique na cabeça do cabeçalho ou em Aparência → Personalizar cabeça. Creeper, Zumbi, Enderman e Steve com prévias. Modos: seguir tema, cor original e cor personalizada independente do tema. Escolha salva no aparelho e incluída no backup/sincronização. Windows atualiza também os ícones da janela e da bandeja em execução; o atalho fixado e o ícone do launcher Android continuam com a identidade padrão.
+
+Seleção, cores, validação do backup e layout verificados em WebView em 1280 e 390 pixels. Ícones nativos DIB testados para quatro cabeças e modo original/personalizado. APK compilado e assinatura validada, sem aparelho físico. As faces adicionais são desenhos de pixels definidos em código, inspirados nas referências enviadas.
