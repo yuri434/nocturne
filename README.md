@@ -1,6 +1,6 @@
 # Yuri Music
 
-Player de música para **Windows e Android**, versão **0.7.2**, com interface minimalista e temas personalizados.
+Player de música para **Windows e Android**, versão **0.7.3**, com interface minimalista e temas personalizados.
 
 ## Baixar
 
@@ -92,3 +92,9 @@ No Windows, a presença envia a capa pública da faixa atual. Sem capa válida, 
 ## Artista no status do Discord — 0.7.2
 
 A presença Windows define `status_display_type=1` para usar o campo `state` (artista) no texto de status. O comportamento é documentado na lista de membros do Discord. O painel compacto da própria conta pode continuar exibindo o nome da aplicação, pois esse layout é controlado pelo cliente Discord. Nome da faixa, artista e capa continuam no cartão de atividade. 15 verificações de payload/IPC isolado passaram; renderização real do painel ainda não foi confirmada.
+
+## Álbuns pelos cards da Início — 0.7.3
+
+Clicar na capa ou no título abre o álbum da música. Sem álbum informado ou disponível, abre a busca de músicas do artista; sem artista, usa o título da faixa. O botão ▶ separado sempre reproduz a seleção diretamente. A navegação preserva a reprodução atual. Em Aparência, a opção Abrir álbum ao clicar nas músicas da Início pode ser desligada para restaurar o clique que apenas reproduz.
+
+Abertura real de álbum, reprodução separada e preferência verificadas em WebView; ausência de metadados de álbum simulada para validar a busca alternativa. 16 testes automatizados passaram. Sem teste físico do APK.
