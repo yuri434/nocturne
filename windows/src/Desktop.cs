@@ -27,7 +27,8 @@ class Desktop:Form{
  Icon themedIcon;MemoryStream themedIconData;string lastAccent;bool changingMode,normalTopMost;FormWindowState normalWindowState;long windowModeRevision;
  [DllImport("user32.dll")]static extern bool RegisterHotKey(IntPtr hWnd,int id,uint modifiers,uint key);
  [DllImport("user32.dll")]static extern bool UnregisterHotKey(IntPtr hWnd,int id);
- [STAThread]static void Main(){Application.EnableVisualStyles();Application.SetCompatibleTextRenderingDefault(false);bool created;using(var mutex=new Mutex(true,"Local\\YuriMusicYoutube05",out created)){if(created)Application.Run(new Desktop());else MessageBox.Show("O Yuri Music 0.5 já está aberto. Procure o ícone perto do relógio.");}}
+ [DllImport("shell32.dll",CharSet=CharSet.Unicode)]static extern int SetCurrentProcessExplicitAppUserModelID(string appId);
+ [STAThread]static void Main(){SetCurrentProcessExplicitAppUserModelID("YuriMusic.Desktop");Application.EnableVisualStyles();Application.SetCompatibleTextRenderingDefault(false);bool created;using(var mutex=new Mutex(true,"Local\\YuriMusicYoutube05",out created)){if(created)Application.Run(new Desktop());else MessageBox.Show("O Yuri Music já está aberto. Procure o ícone perto do relógio.");}}
  string DataFile{get{return Path.Combine(root,"library.json");}}string Media{get{return Path.Combine(root,"Music");}}string Cache{get{return Path.Combine(root,"Covers");}}
  string TestReport{get{return Environment.GetEnvironmentVariable("YURI_YT_TEST_REPORT");}}
  Desktop(){if(!String.IsNullOrEmpty(TestReport))root=Path.Combine(Path.GetDirectoryName(TestReport),"yt05-test-profile-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);Directory.CreateDirectory(Media);Directory.CreateDirectory(Cache);string config=Path.Combine(root,"sync-path.txt");if(File.Exists(config))syncPath=File.ReadAllText(config);
