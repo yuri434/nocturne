@@ -1,0 +1,1 @@
+Ícones e botões minimalistas passam a ser o único estilo. Removida a opção de alternar para ícones pixelados. Preferências antigas são migradas. Fonte Minecraft continua opcional. Windows: fechar versão anterior e extrair em nova pasta. Android: instalar por cima sem desinstalar.

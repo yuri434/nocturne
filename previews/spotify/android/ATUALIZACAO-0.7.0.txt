@@ -1,0 +1,20 @@
+Yuri Music 0.7.0 — Atualizador, notificações e artistas seguidos
+
+Esta versão precisa ser instalada manualmente uma vez.
+Depois: Configurações > Atualizações ou sino > Ver atualização > Atualizar agora.
+O app verifica ao abrir e periodicamente com o app aberto. Só instala quando você escolher.
+Windows fecha o player, substitui os arquivos com backup e reabre. A pasta precisa permitir gravação.
+Android baixa e valida o APK. Autorize instalar atualizações se solicitado e confirme na tela do sistema.
+Os dados da biblioteca e músicas locais permanecem preservados.
+
+Abra o perfil de um artista e toque em Seguir artista.
+O sino reúne atualizações e novos lançamentos disponíveis na fonte.
+Artistas são verificados ao abrir e a cada 30 minutos com o app aberto.
+O primeiro acompanhamento não gera avisos de álbuns antigos.
+Não há push com o app fechado nem garantia de disponibilidade imediata na fonte.
+
+16 testes JavaScript e 11 verificações do atualizador passaram. Fluxo de fechar/substituir/reabrir testado em instalação temporária; falha de cópia e restauração também.
+Consulta real do GitHub e perfil real de artista verificados; avisos de versão futura e lançamento simulados na interface.
+Android compilado e assinatura verificada; instalação pelo sistema ainda requer teste em aparelho físico.
+
+Windows: feche o antigo e extraia em uma nova pasta. Android: instale por cima sem desinstalar.

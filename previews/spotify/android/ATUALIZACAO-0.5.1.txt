@@ -1,0 +1,18 @@
+YURI MUSIC ANDROID 0.5.1 — INTERFACE PARA CELULAR
+
+Instale o APK por cima da versão 0.5. Não desinstale a anterior:
+a atualização usa o mesmo pacote e a mesma assinatura para manter seus dados.
+
+- Quatro abas fixas embaixo: Buscar, Biblioteca, Baixadas e Fila.
+- Busca compacta com filtros separados para músicas, álbuns e artistas.
+- Playlists, curtidas e histórico reunidos na Biblioteca.
+- Lista de músicas limpa, com ações no menu de três pontos.
+- Player compacto na parte inferior; toque no nome/capa para expandir.
+- Player completo com capa grande, progresso, repetição, aleatório e volume.
+- Configurações agrupadas em seções recolhíveis.
+- Interface mobile com texto legível e sem rolagem horizontal.
+
+Validado em tela de 390 x 844: busca e reprodução, abas, menu de faixas,
+criação de playlist e abertura/fechamento do player completo.
+A validação visual foi feita em WebView no PC no tamanho de celular;
+não havia aparelho conectado para testar a interface Android diretamente.

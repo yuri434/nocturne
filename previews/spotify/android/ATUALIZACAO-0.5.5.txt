@@ -1,0 +1,9 @@
+Windows 0.5.6 / Android 0.5.5
+Adicionada opção Configurações > Aparência > Fonte Minecraft.
+Usa o arquivo Minecraft.ttf fornecido pelo usuário, incluído localmente, sem instalação no sistema.
+Aplicada a títulos de interface, menus e botões. Nomes de músicas, artistas e letras continuam legíveis.
+A opção fica desativada inicialmente e é salva junto às preferências, backup e sincronização.
+Validação em WebView: fonte carregada, títulos e menus, ativação/desativação e fonte dos nomes preservada.
+Android: APK compilado; sem aparelho conectado para teste físico.
+Windows: fechar a versão anterior, extrair e abrir YuriMusic-YouTube.exe.
+Android: instalar por cima sem desinstalar para preservar os dados.

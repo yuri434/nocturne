@@ -1,0 +1,1 @@
+Ícones atualizados: engrenagem pixelada com moldura para Configurações e jukebox pixelada para Miniplayer. Tamanho discreto de 20px nos botões superiores; cores acompanham o estado do tema. Validados no WebView. Windows: fechar app anterior e extrair ZIP em nova pasta. Android: instalar por cima, sem desinstalar. APK compilado; sem teste físico em Android.

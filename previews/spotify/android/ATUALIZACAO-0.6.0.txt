@@ -1,0 +1,12 @@
+Yuri Music 0.6.0 — cores principal e secundária
+Em Configurações > Aparência, escolha Cor principal (fundo) e Cor secundária (destaques).
+Texto claro/escuro e tons dos painéis são calculados conforme o fundo.
+Se a cor secundária não tiver contraste para texto, os textos e ícones usam uma cor legível; botões, logo e visualizador mantêm a cor escolhida.
+Salvar tema atual guarda as duas cores. Temas antigos recebem preto como principal.
+Temas prontos: Preto e verde, Noite violeta, Claro azul e Café.
+Restaurar preto e verde retorna as cores e desativa a cor automática da capa.
+Aplicar um tema também desativa a cor automática da capa, para respeitar a escolha.
+Preferências, backup e sincronização preservam ambas as cores.
+Validação: 11 testes passaram; temas, prévia, restauração e contraste em WebView para PC e celular; validação de cores, migração e backup. Android compilado e assinatura verificada; sem aparelho físico conectado.
+Windows: feche a versão anterior, extraia em nova pasta e abra YuriMusic-YouTube.exe.
+Android: instale por cima sem desinstalar, para preservar os dados.

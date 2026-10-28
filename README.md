@@ -138,3 +138,7 @@ A sessão salva faixa atual, ponto e até 500 músicas da fila em arquivo separa
 Continuação automática ativada por padrão fora de álbuns: perto do fim da fila, consulta a rádio da faixa no YouTube Music, embaralha recomendações relacionadas, remove IDs já na fila e adiciona até 15. Não altera filas de álbum nem repetição; opção em Configurações → Som. Gênero/estilo seguem as recomendações disponíveis da fonte. Sem rede ou sugestões novas, mantém a fila existente.
 
 Validação: 26 testes JS aprovados; janela sem borda, controles, maximização na área útil e miniplayer verificados em instância isolada; reinicialização recuperou faixa pausada em 0:43; motor empacotado retornou 25 recomendações reais com duração e capa. Windows e APK compilados; assinatura Android validada. Sem teste em aparelho Android físico.
+
+## Noctune — prévia Spotify
+
+A migração de marca e fonte Spotify está em [previews/spotify](previews/spotify/README.md). A versão estável continua sendo 0.8.0 até validar reprodução autenticada. A prévia preserva o modo YouTube Music como alternativa.

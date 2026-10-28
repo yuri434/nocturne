@@ -1,0 +1,16 @@
+ATUALIZAÇÃO 0.5.3 — Windows / 0.5.2 — Android
+
+Correções:
+- Uma faixa com erro não retoma o áudio da música anterior.
+- Transições não criam temporizadores duplicados.
+- A biblioteca continua acessível ao mudar a largura da tela.
+- Comandos de pausa e reprodução são independentes, inclusive na notificação Android.
+
+Windows: feche o app anterior, extraia o ZIP em uma nova pasta e abra YuriMusic-YouTube.exe.
+As configurações e a coleção continuam em %LOCALAPPDATA%\YuriMusic\YouTube05.
+Android: instale o APK sobre a versão existente, sem desinstalar, para preservar os dados.
+
+Validação: 9 testes automatizados passaram. Teste em WebView confirmou áudio, visualizador,
+cor, transição, parada da faixa anterior, miniplayer e restauração da janela.
+A interface móvel foi testada em larguras de celular e PC; pausas repetidas continuam pausadas.
+APK compilado. Não havia aparelho Android conectado para validar a notificação no dispositivo.

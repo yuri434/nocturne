@@ -1,0 +1,10 @@
+Windows 0.5.5 / Android 0.5.4
+- Ícones pixelados pequenos em Buscar, Curtidas, Histórico, Fila, Agora tocando, Baixadas e controles.
+- Percentual de volume visível e atualizado durante o ajuste, inclusive por atalhos.
+- Removido o ajuste automático de ganho por trechos curtos, que podia oscilar o volume.
+- A opção Suavizar picos de volume usa compressão suave e pode ser desligada em Som.
+- O volume natural pode variar entre gravações; esta opção não faz análise de loudness da faixa inteira.
+Validação: 11 testes automatizados, reprodução real e interface em WebView nas larguras de PC e celular.
+APK compilado e assinatura verificada. Sem aparelho Android conectado para teste físico.
+Windows: feche a versão antiga, extraia em nova pasta e abra YuriMusic-YouTube.exe.
+Android: instale por cima sem desinstalar, para preservar os dados.

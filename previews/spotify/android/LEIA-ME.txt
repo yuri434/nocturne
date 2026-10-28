@@ -1,0 +1,24 @@
+YURI MUSIC 0.5.1 — ANDROID EXPERIMENTAL
+
+Android 8 ou posterior, processador arm64-v8a ou x86_64 e Android System
+WebView atualizado. Instale o APK e use a busca sem conectar ao Spotify.
+
+Compartilha a interface e os recursos musicais com a versão Windows.
+Nas configurações, exporte/importa o backup JSON ou escolha um arquivo de
+biblioteca num provedor de documentos com leitura e escrita para sincronizar.
+O provedor de nuvem precisa já estar configurado no aparelho.
+
+O miniplayer usa Picture-in-Picture. Notificações permitem controlar o som.
+Discord, atalhos globais de Windows, bandeja e sempre por cima são exclusivos
+de PC e aparecem desabilitados. Downloads ficam no armazenamento privado
+do app; gerencie pela seção Baixadas. Desinstalar o app remove esses arquivos.
+
+APK compilado e assinado para testes. Não havia aparelho conectado para testar
+a reprodução real e o segundo plano. Podem ser necessários ajustes por aparelho.
+Não é uma versão publicada em loja nem uma integração oficial com YouTube.
+
+Para compilar: JDK 17+, Android SDK 35, Gradle 8.9 e Python 3.12.
+Defina YURI_BUILD_PYTHON para seu executável Python antes de assembleDebug.
+
+A logo dentro da interface muda junto com o tema. O ícone do lançador Android
+permanece verde.

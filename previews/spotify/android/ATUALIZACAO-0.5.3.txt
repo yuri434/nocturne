@@ -1,0 +1,7 @@
+Correções Windows 0.5.4 / Android 0.5.3
+- Busca sem cortar os tipos ou quebrar o botão; segunda linha em janelas menores no PC.
+- Volume aplicado apenas uma vez. O valor escolhido pelo usuário é preservado.
+- 10 testes automatizados passaram; reprodução e alinhamento conferidos em WebView a 800px.
+- APK compilado; sem aparelho Android conectado para teste físico.
+Windows: feche o app antigo, extraia em nova pasta e execute YuriMusic-YouTube.exe.
+Android: instale sobre a versão atual sem desinstalar, para preservar os dados.

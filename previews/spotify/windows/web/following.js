@@ -1,0 +1,1 @@
+export function newReleases(record,collections){const releases=(collections||[]).filter(r=>/^MPRE[A-Za-z0-9_-]+$/.test(r.id||''));const seen=new Set(record.seen||[]);const fresh=record.initialized?releases.filter(r=>!seen.has(r.id)):[];for(const release of releases)seen.add(release.id);return {fresh,seen:[...seen].slice(-500),initialized:true};}
