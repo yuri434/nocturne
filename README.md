@@ -1,6 +1,6 @@
 # Yuri Music
 
-Player de música para **Windows e Android**, versão **0.7.5**, com interface minimalista e temas personalizados.
+Player de música para **Windows e Android**, versão **0.7.6**, com interface minimalista e temas personalizados.
 
 ## Baixar
 
@@ -108,3 +108,9 @@ O título no player inferior, painel lateral e Agora tocando abre o álbum, usan
 Ícone DIB incorporado no executável Windows e identificação estável da aplicação. Depois de atualizar, desfixe o atalho antigo e fixe novamente uma vez para renovar o ícone armazenado pelo Windows. Botão Início à esquerda da pesquisa, minimalista e seguindo a cor secundária. Verificados extração do ícone do executável, navegação no WebView e 16 testes; Android compilado e assinatura validada, sem teste físico.
 
 A faixa atual recebe uma moldura quadrada na cor secundária, na Início e nas listas. O destaque acompanha a troca da faixa e de tema.
+
+## Capas e tempo no Discord — 0.7.6
+
+Solicita capas de 768 pixels ao CDN quando o endereço permite, preservando a identidade da imagem e a original como alternativa. Funciona também para capas salvas antes desta versão. Teste real encontrou a capa do exemplo em 120×120 e confirmou a versão em 768×768. A resolução final depende da fonte.
+
+Discord usa duração finita do áudio, com alternativa pela duração dos metadados, atualiza em carregamento/alteração de duração/busca na faixa e não envia timestamps inválidos quando o total é desconhecido. 20 testes JS e verificação nativa dos timestamps aprovados; interface verificada no WebView. APK compilado e assinatura validada, sem aparelho físico; exibição final da atividade depende do Discord.

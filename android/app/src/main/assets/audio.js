@@ -8,6 +8,7 @@ export class Player {
   elements.forEach((audio,slot)=>{
    audio.crossOrigin='anonymous';
    audio.addEventListener('timeupdate',()=>{if(slot===this.slot)this.tick();});
+   for(const event of ['loadedmetadata','durationchange','seeked'])audio.addEventListener(event,()=>{if(slot===this.slot&&this.current&&this.loadedKeys[slot]===this.current.key)this.changed('metadata');});
    audio.addEventListener('ended',()=>{if(slot===this.slot&&!this.mix&&!this.transition)this.next(true);});
    for(const event of ['play','pause'])audio.addEventListener(event,()=>{if(slot===this.slot)this.changed('state');});
    audio.addEventListener('error',()=>{if(slot===this.slot&&audio.getAttribute('src')&&!this.loading){this.loadedKeys[slot]=null;this.error(Error('Áudio indisponível ou endereço expirado. Selecione a faixa novamente.'));this.changed('state');}});
