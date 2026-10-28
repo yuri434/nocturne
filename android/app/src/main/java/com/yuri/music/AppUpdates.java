@@ -1,7 +1,7 @@
 package com.yuri.music;
 import android.app.Activity;import android.content.Intent;import android.content.pm.*;import android.net.Uri;import android.os.Build;import android.provider.Settings;import androidx.core.content.FileProvider;import org.json.*;import java.io.*;import java.net.*;import java.nio.charset.StandardCharsets;import java.security.MessageDigest;import java.util.*;import java.util.concurrent.*;
 final class AppUpdates {
- static final String CURRENT="0.7.1",API="https://api.github.com/repos/yuri434/yuri-music/releases/latest";
+ static final String CURRENT="0.7.2",API="https://api.github.com/repos/yuri434/yuri-music/releases/latest";
  final Activity activity;boolean busy;AppUpdates(Activity a){activity=a;}
  static int[] version(String s)throws IOException{if(s==null||!s.matches("v?\\d+\\.\\d+\\.\\d+"))throw new IOException("Versão inválida.");String[] p=s.replaceFirst("^v","").split("\\.");return new int[]{Integer.parseInt(p[0]),Integer.parseInt(p[1]),Integer.parseInt(p[2])};}
  static boolean newer(String a,String b)throws IOException{int[] x=version(a),y=version(b);for(int i=0;i<3;i++){if(x[i]!=y[i])return x[i]>y[i];}return false;}
