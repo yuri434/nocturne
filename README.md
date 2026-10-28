@@ -1,6 +1,6 @@
 # Yuri Music
 
-Player de música para **Windows e Android**, versão **0.6.0**, com interface minimalista e temas personalizados.
+Player de música para **Windows e Android**, versão **0.6.1**, com interface minimalista e temas personalizados.
 
 ## Baixar
 
@@ -61,6 +61,10 @@ Biblioteca e preferências ficam no aparelho; no Windows, em `%LOCALAPPDATA%/Yur
 
 O arquivo `Minecraft.ttf` e a imagem do ícone foram fornecidos pelo autor do projeto. Não foi atribuída uma licença de redistribuição específica a esses assets. As licenças dos componentes de terceiros permanecem aplicáveis; este repositório ainda não declara uma licença geral para o código próprio.
 
-## Validação da versão 0.6.0
+## Validação da versão 0.6.1
 
-11 testes automatizados passaram. Temas claros/escuros, navegação e controles foram conferidos em WebView com tamanhos de PC e celular. O APK foi compilado e sua assinatura verificada; não houve teste desta versão em aparelho Android físico.
+13 testes automatizados passaram. Temas claros/escuros, navegação e controles foram conferidos em WebView com tamanhos de PC e celular. O APK foi compilado e sua assinatura verificada; não houve teste desta versão em aparelho Android físico.
+
+### Correção 0.6.1
+
+Destaques preservam o tom da cor secundária quando precisam de contraste. Barras de volume/progresso e controles acompanham o tema; textos principais mantêm contraste automático.
