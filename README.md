@@ -1,6 +1,6 @@
 # Yuri Music
 
-Player de música para **Windows e Android**, versão **0.7.3**, com interface minimalista e temas personalizados.
+Player de música para **Windows e Android**, versão **0.7.4**, com interface minimalista e temas personalizados.
 
 ## Baixar
 
@@ -98,3 +98,7 @@ A presença Windows define `status_display_type=1` para usar o campo `state` (ar
 Clicar na capa ou no título abre o álbum da música. Sem álbum informado ou disponível, abre a busca de músicas do artista; sem artista, usa o título da faixa. O botão ▶ separado sempre reproduz a seleção diretamente. A navegação preserva a reprodução atual. Em Aparência, a opção Abrir álbum ao clicar nas músicas da Início pode ser desligada para restaurar o clique que apenas reproduz.
 
 Abertura real de álbum, reprodução separada e preferência verificadas em WebView; ausência de metadados de álbum simulada para validar a busca alternativa. 16 testes automatizados passaram. Sem teste físico do APK.
+
+## Nome da faixa clicável no player — 0.7.4
+
+O título no player inferior, painel lateral e Agora tocando abre o álbum, usando a busca alternativa de músicas do artista quando não há álbum disponível. Ao passar o mouse ou focar pelo teclado, o texto usa a cor secundária legível do tema e sublinhado. O clique preserva a faixa atual; no celular, não dispara também o player expandido. Clique, teclado e regra de destaque verificados em WebView; APK compilado e assinado, sem teste físico.
