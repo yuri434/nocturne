@@ -1,6 +1,6 @@
 # Yuri Music
 
-Player de música para **Windows e Android**, versão **0.6.1**, com interface minimalista e temas personalizados.
+Player de música para **Windows e Android**, versão **0.7.0**, com interface minimalista e temas personalizados.
 
 ## Baixar
 
@@ -61,10 +61,26 @@ Biblioteca e preferências ficam no aparelho; no Windows, em `%LOCALAPPDATA%/Yur
 
 O arquivo `Minecraft.ttf` e a imagem do ícone foram fornecidos pelo autor do projeto. Não foi atribuída uma licença de redistribuição específica a esses assets. As licenças dos componentes de terceiros permanecem aplicáveis; este repositório ainda não declara uma licença geral para o código próprio.
 
-## Validação da versão 0.6.1
+## Validação da versão 0.7.0
 
-13 testes automatizados passaram. Temas claros/escuros, navegação e controles foram conferidos em WebView com tamanhos de PC e celular. O APK foi compilado e sua assinatura verificada; não houve teste desta versão em aparelho Android físico.
+16 testes automatizados passaram. Temas claros/escuros, navegação e controles foram conferidos em WebView com tamanhos de PC e celular. O APK foi compilado e sua assinatura verificada; não houve teste desta versão em aparelho Android físico.
 
-### Correção 0.6.1
+### Correção 0.7.0
 
 Destaques preservam o tom da cor secundária quando precisam de contraste. Barras de volume/progresso e controles acompanham o tema; textos principais mantêm contraste automático.
+
+## Atualizador e notificações — 0.7.0
+
+Instale manualmente esta versão uma vez. As versões futuras aparecem em **Configurações → Atualizações** e no **sino**.
+
+- Verificação ao abrir, periodicamente com o app aberto e por botão manual.
+- Downloads somente das releases oficiais de `yuri434/yuri-music`, com SHA-256 conferido antes da instalação.
+- Windows: helper separado aguarda o player fechar, mantém backup dos arquivos substituídos, restaura em caso de falha e reabre o app. A pasta do aplicativo precisa permitir gravação.
+- Android: confere pacote e assinatura, pede autorização para instalar aplicativos se necessário e abre o instalador do sistema. A confirmação do Android continua necessária.
+- Biblioteca, preferências e músicas locais ficam preservadas.
+
+No perfil de um artista, toque em **Seguir artista**. O catálogo inicial é salvo sem avisar sobre lançamentos antigos. Novidades disponíveis na fonte são verificadas ao abrir e a cada 30 minutos com o app aberto. O sino reúne os avisos, com opção de marcar como lidos e gerenciar artistas seguidos. Não há serviço de push nem verificação com o aplicativo encerrado; a fonte pode atrasar ou omitir lançamentos.
+
+16 testes JavaScript, 11 verificações nativas do atualizador e um ensaio de fechamento/substituição/reabertura com aplicativo de teste passaram. Os avisos de uma versão futura e de um lançamento foram simulados na interface; consulta real de releases e perfil de artista também foram verificadas. A instalação Android precisa ser validada em aparelho físico.
+
+Veja [como preparar as próximas releases](docs/RELEASES.md). Não remova o arquivo de checksums nem troque a assinatura do Android.

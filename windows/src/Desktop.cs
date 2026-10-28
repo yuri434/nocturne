@@ -22,7 +22,7 @@ class Desktop:Form{
  readonly string root=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"YuriMusic","YouTube05");
  readonly SemaphoreSlim backendSlots=new SemaphoreSlim(3,3),cacheLock=new SemaphoreSlim(1,1);readonly List<Process> workers=new List<Process>();readonly HttpClient http=new HttpClient(new HttpClientHandler{AllowAutoRedirect=false}){Timeout=TimeSpan.FromSeconds(20)};
  readonly NotifyIcon tray=new NotifyIcon();readonly DiscordPresence discord=new DiscordPresence();
- readonly AudioProxy proxy=new AudioProxy();
+ readonly AudioProxy proxy=new AudioProxy();readonly AppUpdates updates=new AppUpdates();
  bool closing,mini,minimizeTray=true,hotkeys=false,discreet;int cacheMB=64;Rectangle normalBounds;string syncPath;System.Windows.Forms.Timer starter;
  Icon themedIcon;MemoryStream themedIconData;string lastAccent;bool changingMode,normalTopMost;FormWindowState normalWindowState;long windowModeRevision;
  [DllImport("user32.dll")]static extern bool RegisterHotKey(IntPtr hWnd,int id,uint modifiers,uint key);
@@ -53,6 +53,8 @@ class Desktop:Form{
  string ReadLibrary(string path){if(!File.Exists(path))return null;if(new FileInfo(path).Length>16*1024*1024)throw new Exception("Arquivo de biblioteca muito grande.");return CheckLibrary(File.ReadAllText(path));}
  async Task<object> Dispatch(Dictionary<string,object> r){string op=S(r,"op");switch(op){
  case "search":case "lyrics":case "album":case "artist":case "artist-tracks":return await Backend(r,65000);
+ case "update-check":return await updates.Check();
+ case "update-install":string installDir=AppDomain.CurrentDomain.BaseDirectory;string probe=Path.Combine(installDir,".yuri-update-write-"+Guid.NewGuid().ToString("N"));try{File.WriteAllText(probe,"");File.Delete(probe);}catch{throw new IOException("Esta pasta não permite atualização. Extraia o aplicativo em uma pasta sua e tente novamente.");}string stage=await updates.Stage(S(r,"version"));string updater=Path.Combine(stage,"YuriMusicUpdater.exe");File.Copy(Path.Combine(installDir,"YuriMusicUpdater.exe"),updater,true);Process.Start(new ProcessStartInfo(updater,"--apply \""+stage+"\" \""+installDir.TrimEnd(Path.DirectorySeparatorChar)+"\" "+Process.GetCurrentProcess().Id){UseShellExecute=false,CreateNoWindow=true,WindowStyle=ProcessWindowStyle.Hidden});var exitTimer=new System.Windows.Forms.Timer{Interval=700};exitTimer.Tick+=(sender,args)=>{exitTimer.Stop();exitTimer.Dispose();Close();};exitTimer.Start();return new{message="Download verificado. O aplicativo será fechado e reaberto atualizado."};
  case "playback-status":return new{ok=true};
  case "accent":TintIcon(S(r,"color"));return new{ok=true};
  case "stream":var streamResult=await Backend(r,65000) as Dictionary<string,object>;if(streamResult!=null&&!streamResult.ContainsKey("error"))streamResult["url"]=proxy.Add(Convert.ToString(streamResult["url"]));return streamResult;
