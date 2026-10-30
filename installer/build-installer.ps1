@@ -14,6 +14,6 @@ foreach($f in $files){$rel=$f.FullName.Substring($Payload.Length+1);$parent=Spli
 foreach($dir in ($dirs.Keys|Sort-Object Length -Descending)){$remove.Add('RMDir "$INSTDIR\'+$dir+'"')}
 [IO.File]::WriteAllLines((Join-Path $PSScriptRoot 'payload-files.nsh'),$install,[Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllLines((Join-Path $PSScriptRoot 'payload-remove.nsh'),$remove,[Text.UTF8Encoding]::new($false))
-& $Compiler /V2 "/DPAYLOAD=$Payload" "/DWEBVIEW=$Bootstrapper" "/DOUTFILE=$([IO.Path]::GetFullPath($Output))" (Join-Path $PSScriptRoot 'Nocturne.nsi')
+& $Compiler /V2 /INPUTCHARSET UTF8 "/DPAYLOAD=$Payload" "/DWEBVIEW=$Bootstrapper" "/DOUTFILE=$([IO.Path]::GetFullPath($Output))" (Join-Path $PSScriptRoot 'Nocturne.nsi')
 if($LASTEXITCODE){throw 'Falha no setup'}
 Write-Host "Setup criado: $Output"
