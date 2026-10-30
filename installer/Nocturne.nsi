@@ -11,7 +11,7 @@ Unicode True
  !error "Informe /DWEBVIEW com o bootstrapper oficial Microsoft"
 !endif
 !ifndef OUTFILE
- !define OUTFILE "Nocturne-Setup-0.12.0.exe"
+ !define OUTFILE "Nocturne-Setup-0.12.1.exe"
 !endif
 Name "Nocturne"
 OutFile "${OUTFILE}"
@@ -20,11 +20,11 @@ InstallDirRegKey HKCU "Software\Nocturne" "InstallDir"
 RequestExecutionLevel user
 SetCompressor /SOLID lzma
 SetDatablockOptimize on
-VIProductVersion "0.12.0.0"
+VIProductVersion "0.12.1.0"
 VIAddVersionKey "ProductName" "Nocturne"
 VIAddVersionKey "FileDescription" "Instalador do Nocturne"
-VIAddVersionKey "FileVersion" "0.12.0"
-VIAddVersionKey "ProductVersion" "0.12.0"
+VIAddVersionKey "FileVersion" "0.12.1"
+VIAddVersionKey "ProductVersion" "0.12.1"
 VIAddVersionKey "LegalCopyright" "Nocturne contributors · GPLv3"
 Icon "${PAYLOAD}\YuriMusic.ico"
 UninstallIcon "${PAYLOAD}\YuriMusic.ico"
@@ -98,7 +98,7 @@ Section "Nocturne (obrigatório)" Main
   ExecWait '"$INSTDIR\InstallSupport.exe" --taglink "$SMPROGRAMS\Nocturne.lnk"' $0
   WriteRegStr HKCU "Software\Nocturne" "InstallDir" "$INSTDIR"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Nocturne" "DisplayName" "Nocturne"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Nocturne" "DisplayVersion" "0.12.0"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Nocturne" "DisplayVersion" "0.12.1"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Nocturne" "Publisher" "Nocturne"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Nocturne" "InstallLocation" "$INSTDIR"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Nocturne" "DisplayIcon" "$INSTDIR\YuriMusic.ico"

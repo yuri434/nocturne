@@ -1,4 +1,4 @@
-param([string]$Payload=(Join-Path $PSScriptRoot '..\windows'),[string]$Compiler='makensis.exe',[string]$Bootstrapper,[string]$Output=(Join-Path $PSScriptRoot '..\..\Nocturne-Setup-0.12.0.exe'))
+param([string]$Payload=(Join-Path $PSScriptRoot '..\windows'),[string]$Compiler='makensis.exe',[string]$Bootstrapper,[string]$Output=(Join-Path $PSScriptRoot '..\..\Nocturne-Setup-0.12.1.exe'))
 $ErrorActionPreference='Stop'
 $Payload=(Resolve-Path $Payload).Path
 if(!$Bootstrapper){throw 'Informe -Bootstrapper com MicrosoftEdgeWebview2Setup.exe obtido em https://go.microsoft.com/fwlink/p/?LinkId=2124703'}

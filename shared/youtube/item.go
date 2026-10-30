@@ -87,6 +87,9 @@ func (item MusicItem) IsVideo() bool { return item.Kind == KindVideo }
 // ArtistID is the artist a track names beside itself, or "" when it names
 // none.
 func (item MusicItem) ArtistID() string {
+	if isArtistID(item.ArtistBrowseID) {
+		return item.ArtistBrowseID
+	}
 	if item.VideoID != "" && isArtistID(item.BrowseID) {
 		return item.BrowseID
 	}
@@ -172,9 +175,10 @@ type MusicItem struct {
 	// Artists is every artist the item credits, in the order its byline links
 	// them, joined as "First, Second". It is empty for an item whose byline links
 	// none. Artist is the first of them.
-	Artists       string `json:"artists,omitempty"`
-	Album         string `json:"album,omitempty"`
-	AlbumBrowseID string `json:"albumBrowseId,omitempty"`
+	Artists        string `json:"artists,omitempty"`
+	Album          string `json:"album,omitempty"`
+	ArtistBrowseID string `json:"artistBrowseId,omitempty"`
+	AlbumBrowseID  string `json:"albumBrowseId,omitempty"`
 }
 
 // setCredits makes item credit the artists a byline links and the album.

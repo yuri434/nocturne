@@ -12,7 +12,12 @@ import (
 
 // BrowseResult represents a Music browse page such as an artist, album,
 // playlist, home feed, explore page, library, or account settings.
+type BrowseArtist struct {
+	Name string `json:"name"`
+	ID   string `json:"id"`
+}
 type BrowseResult struct {
+	Artists []BrowseArtist `json:"artists,omitempty"`
 	// Title and Thumbnail are the page's own heading, the name and picture it
 	// puts over its content, as an artist's does.
 	Title     string `json:"title,omitempty"`
@@ -311,7 +316,7 @@ func browseResult(root any) *BrowseResult {
 	items, sections, _ := browseParts(root, false)
 	title, thumbnail := pageHeading(root)
 	return &BrowseResult{
-		Title: title, Thumbnail: thumbnail,
+		Title: title, Thumbnail: thumbnail, Artists: headerArtists(root),
 		Items: items, Sections: sections,
 		ContinuationToken: pageContinuationToken(root),
 		Library:           headerLibraryState(root),
@@ -435,4 +440,56 @@ func nestedPageHeading(value any) (string, string) {
 		}
 	}
 	return "", ""
+}
+
+// Only read artist links in page headers, never recommendations or menus.
+func headerArtists(value any) []BrowseArtist {
+	result := []BrowseArtist{}
+	seen := map[string]bool{}
+	var links func(any)
+	links = func(v any) {
+		switch n := v.(type) {
+		case []any:
+			for _, x := range n {
+				links(x)
+			}
+		case *jsonObject:
+			if ep, ok := n.get("navigationEndpoint").(*jsonObject); ok {
+				if b, ok := ep.get("browseEndpoint").(*jsonObject); ok {
+					id, _ := b.get("browseId").(string)
+					name, _ := n.get("text").(string)
+					if isArtistID(id) && name != "" && !seen[id] {
+						result = append(result, BrowseArtist{Name: name, ID: id})
+						seen[id] = true
+					}
+				}
+			}
+			for _, m := range n.members {
+				links(m.value)
+			}
+		}
+	}
+	var walk func(any)
+	walk = func(v any) {
+		switch n := v.(type) {
+		case []any:
+			for _, x := range n {
+				walk(x)
+			}
+		case *jsonObject:
+			for _, key := range []string{"musicResponsiveHeaderRenderer", "musicDetailHeaderRenderer", "musicImmersiveHeaderRenderer"} {
+				if h, ok := n.get(key).(*jsonObject); ok {
+					for _, field := range []string{"straplineTextOne", "subtitle", "longBylineText", "shortBylineText"} {
+						links(h.get(field))
+					}
+					return
+				}
+			}
+			for _, m := range n.members {
+				walk(m.value)
+			}
+		}
+	}
+	walk(value)
+	return result
 }

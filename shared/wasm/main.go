@@ -116,7 +116,7 @@ func page(v *youtube.BrowseResult) map[string]any {
 		ss, cc := items(s.Items)
 		sections = append(sections, map[string]any{"title": s.Title, "songs": ss, "collections": cc, "continuation": s.ContinuationToken})
 	}
-	return map[string]any{"title": v.Title, "description": v.Description, "thumbnail": v.Thumbnail, "songs": songs, "collections": collections, "sections": sections, "continuation": v.ContinuationToken, "artists": []any{}}
+	return map[string]any{"title": v.Title, "description": v.Description, "thumbnail": v.Thumbnail, "songs": songs, "collections": collections, "sections": sections, "continuation": v.ContinuationToken, "artists": v.Artists}
 }
 func dispatch(r request) (any, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
