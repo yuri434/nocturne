@@ -1,0 +1,1 @@
+<resources><style name="NocturneTheme" parent="android:style/Theme.Material.NoActionBar"><item name="android:windowSplashScreenBackground">#141218</item><item name="android:windowSplashScreenAnimatedIcon">@drawable/nocturne_mascot</item><item name="android:windowBackground">#141218</item><item name="android:colorAccent">#e6a0be</item></style></resources>

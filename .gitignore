@@ -1,25 +1,11 @@
-# Dados locais e credenciais
-.env
-.env.*
-!.env.example
-*.key
-*.pem
-*.jks
-*.keystore
-local.properties
-library.json
-sync-path.txt
-Music/
-Covers/
-# Builds e dependências
-.gradle/
 **/build/
-__pycache__/
-*.pyc
-.venv/
-node_modules/
-dist/
+**/.gradle/
+**/__pycache__/
+**/local.properties
 *.exe
 *.dll
-*.apk
-*.zip
+*.pdb
+*.keystore
+*.jks
+**/meiro.wasm
+**/fonts/GoogleSans.ttf

@@ -19,6 +19,6 @@ partial class Desktop{
   return WindowMode();
  }
  protected override async void OnFormClosing(FormClosingEventArgs e){
-  if(!chromeCloseReady&&!closing&&view.CoreWebView2!=null){e.Cancel=true;base.OnFormClosing(e);chromeCloseReady=true;try{string encoded=await view.ExecuteScriptAsync("JSON.stringify(window.yuriPlaybackSnapshot?window.yuriPlaybackSnapshot():null)");string data=json.Deserialize<string>(encoded);if(!String.IsNullOrEmpty(data)&&data!="null"&&data.Length<2*1024*1024)AtomicWrite(System.IO.Path.Combine(root,"playback.json"),data);}catch{}BeginInvoke(new Action(Close));return;}base.OnFormClosing(e);
+  if(!chromeCloseReady&&!closing&&view.CoreWebView2!=null){e.Cancel=true;base.OnFormClosing(e);chromeCloseReady=true;try{string encoded=await view.ExecuteScriptAsync("JSON.stringify(window.yuriPlaybackSnapshot?window.yuriPlaybackSnapshot():null)");string data=json.Deserialize<string>(encoded);if(!String.IsNullOrEmpty(data)&&data!="null"&&data.Length<2*1024*1024)AtomicWrite(System.IO.Path.Combine(root,"playback.noctune-preview.json"),data);}catch{}BeginInvoke(new Action(Close));return;}base.OnFormClosing(e);
  }
 }
