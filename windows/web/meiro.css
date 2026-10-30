@@ -39,3 +39,8 @@ body:not(.animations) *,body.discreet *{animation:none!important;transition:none
 header form #header-home{font:22px system-ui}header form #header-home svg{width:21px;height:21px}
 
 #settings-sidebar.pixel-only{display:flex;align-items:center;justify-content:center;width:52px;height:52px;min-height:52px;margin:24px auto 0;border-radius:18px;background:var(--raised)}#settings-sidebar.pixel-only:before{width:23px;height:23px}
+/* True black surfaces; accent highlights and legible borders remain visible. */
+body.ultraDark :is(main,footer,dialog,.now-sidebar,header form,.home-shortcuts button,#settings-sidebar,.search-kind-menu,#toast){background:#000}
+body.ultraDark #splash{background:#000}
+body.ultraDark button:hover{outline:1px solid var(--accent)}
+#brand-icon{object-fit:cover;border-radius:50%;filter:none!important}
