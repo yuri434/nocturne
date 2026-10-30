@@ -1,3 +1,3 @@
 using System;using System.Diagnostics;using System.IO;using System.Windows.Forms;using System.Reflection;
-[assembly:AssemblyTitle("Nocturne")][assembly:AssemblyProduct("Nocturne")][assembly:AssemblyVersion("0.11.1.0")][assembly:AssemblyFileVersion("0.11.1.0")]
+[assembly:AssemblyTitle("Nocturne")][assembly:AssemblyProduct("Nocturne")][assembly:AssemblyVersion("0.12.0.0")][assembly:AssemblyFileVersion("0.12.0.0")]
 class NocturneLauncher{[STAThread]static void Main(){string file=Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"YuriMusic-YouTube.exe");if(!File.Exists(file)){MessageBox.Show("Extraia o ZIP inteiro antes de abrir o Nocturne.","Nocturne");return;}Process.Start(new ProcessStartInfo(file){WorkingDirectory=AppDomain.CurrentDomain.BaseDirectory,UseShellExecute=false});}}

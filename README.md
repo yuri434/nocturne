@@ -1,4 +1,4 @@
-# Nocturne 0.11.1 · integração Meiro
+# Nocturne 0.12.0
 
 Nocturne para Windows e Android, com o cliente YouTube Music do [Meiro](https://github.com/elianiva/meiro), revisão `67792edd6350b4fad54bbbea27a3b9acafe6c3bd`. O cliente Go em `shared/youtube` é reaproveitado sob GPLv3, com correções Nocturne para cabeçalhos responsivos e navegação de álbuns, sem dados simulados. Compila para WebAssembly e é compartilhado pelas duas interfaces; o transporte e as credenciais ficam nos hosts nativos.
 
@@ -10,7 +10,7 @@ A busca e o áudio funcionam sem conta quando o YouTube os disponibiliza. Para b
 
 ## Preservado e alterado
 
-- Nome Nocturne, temas com duas cores, Minecraft opcional, densidade, miniplayer, Discord, controles de mídia, fila, playlists locais, backups, notificações e atualização.
+- Nome Nocturne, temas com duas cores, densidade, miniplayer, Discord, controles de mídia, fila, playlists locais, backups, notificações e atualização.
 - Mascote vampira original em lugar do Creeper, incluindo ícones, janela, bandeja e abertura Android.
 - Layout Material 3 inspirado nas métricas e telas do Meiro, com fonte Google Sans (OFL), navegação lateral no PC e navegação para toque no celular. As cores salvas do usuário prevalecem.
 - Busca com filtros e continuações reais, início/explorar/biblioteca/retrospectiva, álbuns, artistas, playlists, podcasts, letras e rádio pelo cliente original. Menus de botão direito e toque prolongado.
@@ -38,3 +38,11 @@ GNU GPL versão 3; sem garantia. O código-fonte correspondente acompanha a dist
 ## Correções 0.11.1
 
 Álbuns preservam o endpoint original e cabeçalhos responsivos, com capa/título de fallback. Espectro visível novamente no desktop, com opção arco-íris e reflexo. Home junto à busca, mascote maior, animações opcionais e preferência Minecraft removida. Slider desmuta ao ajustar; comandos de volume Spotify são serializados e agrupados. Login sai da janela controlada, recusada pelo Google, para o navegador normal; importação explícita permanece necessária.
+
+## Instalação Windows · 0.12.0
+
+Use Nocturne-Setup-0.12.0.exe. Instala por usuário em %LOCALAPPDATA%/Programs/Nocturne, sem exigir administrador, cria entrada no menu Iniciar e em Aplicativos instalados, oferece atalho na área de trabalho e instala o WebView2 oficial Microsoft caso necessário (internet). Feche o app, inclusive a bandeja, antes de instalar ou desinstalar. A desinstalação preserva biblioteca, preferências, downloads e arquivos não pertencentes ao pacote. A edição ZIP portátil continua disponível.
+
+O repositório foi renomeado para https://github.com/yuri434/nocturne. Por causa da troca de endereço, instalações antigas podem precisar do setup uma vez; a versão nova usa o endereço Nocturne no atualizador. Removidas referências ao provedor nas mensagens de carregamento e adicionado ícone no botão lateral de aparência/configurações.
+
+Compilar setup: instale ou extraia NSIS 3.12 oficial; compile o Windows com build.ps1, depois execute installer/build-installer.ps1 com -Payload, -Compiler e -Bootstrapper. O bootstrapper WebView2 vem de https://go.microsoft.com/fwlink/p/?LinkId=2124703 e o script exige assinatura Microsoft válida. O setup Nocturne não tem assinatura comercial de editor.

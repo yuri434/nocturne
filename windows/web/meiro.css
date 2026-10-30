@@ -37,3 +37,5 @@ body:not(.animations) *,body.discreet *{animation:none!important;transition:none
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 header form #header-home{font:22px system-ui}header form #header-home svg{width:21px;height:21px}
+
+#settings-sidebar.pixel-only{display:flex;align-items:center;justify-content:center;width:52px;height:52px;min-height:52px;margin:24px auto 0;border-radius:18px;background:var(--raised)}#settings-sidebar.pixel-only:before{width:23px;height:23px}
