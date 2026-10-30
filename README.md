@@ -1,12 +1,12 @@
-# Nocturne 0.11.0 · integração Meiro
+# Nocturne 0.11.1 · integração Meiro
 
-Nocturne para Windows e Android, com o cliente YouTube Music do [Meiro](https://github.com/elianiva/meiro), revisão `67792edd6350b4fad54bbbea27a3b9acafe6c3bd`. O cliente Go em `shared/youtube` é reaproveitado sob GPLv3, sem substituir suas requisições por respostas simuladas. Compila para WebAssembly e é compartilhado pelas duas interfaces; o transporte e as credenciais ficam nos hosts nativos.
+Nocturne para Windows e Android, com o cliente YouTube Music do [Meiro](https://github.com/elianiva/meiro), revisão `67792edd6350b4fad54bbbea27a3b9acafe6c3bd`. O cliente Go em `shared/youtube` é reaproveitado sob GPLv3, com correções Nocturne para cabeçalhos responsivos e navegação de álbuns, sem dados simulados. Compila para WebAssembly e é compartilhado pelas duas interfaces; o transporte e as credenciais ficam nos hosts nativos.
 
 ## Usar
 
 Windows: extraia o ZIP completo e abra **Nocturne.exe**. Android: instale o APK correspondente à sua instalação. O principal mantém `com.yuri.music.youtube`; o APK preview-update mantém `com.yuri.music.noctune.preview`. Não desinstale para atualizar.
 
-A busca e o áudio funcionam sem conta quando o YouTube os disponibiliza. Para biblioteca, recomendações pessoais, curtidas e playlists da conta, abra Configurações → Conta YouTube Music. No Windows, o login abre Edge/Chrome em um perfil separado. No Android, abre uma Activity com a página oficial e ajuste dos insets do teclado. O Google pode recusar uma WebView: a recusa é mostrada e não é contornada. A importação avançada de uma sessão própria usa um campo nativo protegido; nunca envie cookies ou senhas em chats.
+A busca e o áudio funcionam sem conta quando o YouTube os disponibiliza. Para biblioteca, recomendações pessoais, curtidas e playlists da conta, abra Configurações → Conta YouTube Music. O login abre o navegador normal no Windows e Android. A sessão não é capturada automaticamente: após entrar, a conexão ao app exige importar a própria sessão no campo nativo protegido. O Google pode recusar uma WebView: a recusa é mostrada e não é contornada. A importação avançada de uma sessão própria usa um campo nativo protegido; nunca envie cookies ou senhas em chats.
 
 ## Preservado e alterado
 
@@ -34,3 +34,7 @@ Esta é uma adaptação para a arquitetura existente do Nocturne, não uma compi
 ## Licença
 
 GNU GPL versão 3; sem garantia. O código-fonte correspondente acompanha a distribuição. Créditos e licenças separadas em `THIRD-PARTY-NOTICES.md` e `third_party/`. A fonte Google Sans usa OFL; a fonte Minecraft fornecida ao projeto mantém sua licença separada. A mascote é original e não utiliza a imagem de banco com marca-d’água.
+
+## Correções 0.11.1
+
+Álbuns preservam o endpoint original e cabeçalhos responsivos, com capa/título de fallback. Espectro visível novamente no desktop, com opção arco-íris e reflexo. Home junto à busca, mascote maior, animações opcionais e preferência Minecraft removida. Slider desmuta ao ajustar; comandos de volume Spotify são serializados e agrupados. Login sai da janela controlada, recusada pelo Google, para o navegador normal; importação explícita permanece necessária.

@@ -1,4 +1,4 @@
-// Nocturne's cross-platform adapter. Meiro's GPLv3 YouTube client is unchanged.
+// Nocturne's cross-platform adapter. Meiro's GPLv3 YouTube client includes Nocturne metadata fixes.
 //go:build js && wasm
 
 package main
@@ -77,7 +77,7 @@ type request struct {
 }
 
 func item(v youtube.MusicItem) map[string]any {
-	return map[string]any{"id": v.VideoID, "title": v.Title, "artists": first(v.Artists, v.Artist, v.Subtitle), "artistId": v.ArtistID(), "albumName": v.Album, "thumbnail": v.Thumbnail, "duration": v.Duration, "playlistSetId": v.PlaylistSetID}
+	return map[string]any{"id": v.VideoID, "title": v.Title, "artists": first(v.Artists, v.Artist, v.Subtitle), "artistId": v.ArtistID(), "albumName": v.Album, "albumId": v.AlbumBrowseID, "thumbnail": v.Thumbnail, "duration": v.Duration, "playlistSetId": v.PlaylistSetID}
 }
 func first(values ...string) string {
 	for _, v := range values {

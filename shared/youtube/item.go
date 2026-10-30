@@ -172,8 +172,9 @@ type MusicItem struct {
 	// Artists is every artist the item credits, in the order its byline links
 	// them, joined as "First, Second". It is empty for an item whose byline links
 	// none. Artist is the first of them.
-	Artists string `json:"artists,omitempty"`
-	Album   string `json:"album,omitempty"`
+	Artists       string `json:"artists,omitempty"`
+	Album         string `json:"album,omitempty"`
+	AlbumBrowseID string `json:"albumBrowseId,omitempty"`
 }
 
 // setCredits makes item credit the artists a byline links and the album.

@@ -22,3 +22,18 @@ body.animations :is(main,.home-card,.song,button,footer){transition:background .
 
 .search-filters{width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;contain:layout paint}#browse,#home,#now,#results,#collections{min-width:0;max-width:100%}
 
+
+/* Nocturne 0.11.1: visible spectrum, larger mascot and search Home. */
+header #brand-button{left:18px;top:4px;width:78px;height:78px}header #brand-icon{width:78px;height:78px}
+header form #header-home{display:inline-flex;align-items:center;justify-content:center;flex:0 0 42px;width:42px;height:42px;border:0;border-radius:50%;padding:10px;background:var(--hover)}
+@media(min-width:1050px){.workspace{grid-template-columns:108px minmax(0,1fr) 275px}.now-sidebar{display:flex;flex-direction:column;border:0;border-radius:26px;margin-left:12px;background:var(--raised);overflow:auto}.now-sidebar .visualizer-box{margin-top:16px}.now-sidebar h2{font-size:20px}.now-sidebar #side-now{margin-top:auto}}
+@media(max-width:650px){header #brand-button{left:8px;top:1px;width:64px;height:64px}header #brand-icon{width:64px;height:64px}header form #header-home{flex-basis:34px;width:34px;height:36px;padding:8px}header form #search-kind{flex-basis:70px;width:70px}header form>button[type=submit]{padding:10px 9px}}
+body.animations:not(.discreet) :is(.home-card,.collection,.feed-card,.song){transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+body.animations:not(.discreet) :is(.home-card,.collection,.feed-card):hover{transform:translateY(-4px)}
+body.animations:not(.discreet) button:active{transform:scale(.96)}
+body.animations:not(.discreet) main>section:not([hidden]){animation:nocturne-reveal .28s ease both}
+@keyframes nocturne-reveal{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+body:not(.animations) *,body.discreet *{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+header form #header-home{font:22px system-ui}header form #header-home svg{width:21px;height:21px}

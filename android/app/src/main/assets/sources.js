@@ -19,5 +19,6 @@ export class SourcePlayer extends Player{
  async next(ended=false){if(!this.external)return super.next(ended);try{await this.call({op:'spotify-next'});await this.pollSpotify();}catch(e){this.error(e);}}
  async previous(){if(!this.external)return super.previous();try{await this.call({op:'spotify-previous'});await this.pollSpotify();}catch(e){this.error(e);}}
  async seekTo(position){if(!Number.isFinite(position))return;if(this.external){this.spotifyState.currentTime=position;await this.call({op:'spotify-seek',position});}else this.audio.currentTime=position;}
- update(){super.update();if(this.external){const volume=this.muted?0:this.settings().volume;if(volume!==this.lastSpotifyVolume){this.lastSpotifyVolume=volume;this.call({op:'spotify-volume',volume}).catch(()=>{});}}}
+ async flushSpotifyVolume(){if(this.spotifyVolumeBusy)return;this.spotifyVolumeBusy=true;try{while(this.pendingSpotifyVolume!==undefined){const volume=this.pendingSpotifyVolume;this.pendingSpotifyVolume=undefined;await this.call({op:'spotify-volume',volume});}}catch{this.lastSpotifyVolume=-1;}finally{this.spotifyVolumeBusy=false;}}
+ update(){super.update();if(this.external){const volume=this.muted?0:this.settings().volume;if(volume!==this.lastSpotifyVolume){this.lastSpotifyVolume=volume;this.pendingSpotifyVolume=volume;this.flushSpotifyVolume();}}}
 }

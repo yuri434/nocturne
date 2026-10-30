@@ -43,6 +43,9 @@ func pageHeading(root any) (title, thumbnail string) {
 	if !ok {
 		return "", ""
 	}
+	if title, thumbnail := nestedPageHeading(object); title != "" {
+		return title, thumbnail
+	}
 	header, ok := object.get("header").(*jsonObject)
 	if !ok {
 		return "", ""
@@ -406,4 +409,30 @@ func (c *Client) browse(ctx context.Context, browseID string) (*BrowseResult, er
 		return nil, err
 	}
 	return c.newBrowseResult(raw), nil
+}
+
+// Nocturne: support responsive headers nested in two-column album pages.
+func nestedPageHeading(value any) (string, string) {
+	switch n := value.(type) {
+	case []any:
+		for _, child := range n {
+			if t, i := nestedPageHeading(child); t != "" {
+				return t, i
+			}
+		}
+	case *jsonObject:
+		for _, key := range []string{"musicResponsiveHeaderRenderer", "musicDetailHeaderRenderer", "musicVisualHeaderRenderer", "musicImmersiveHeaderRenderer"} {
+			if h, ok := n.get(key).(*jsonObject); ok {
+				if t := rendererText(h.get("title")); t != "" {
+					return t, rendererThumbnail(h.get("thumbnail"))
+				}
+			}
+		}
+		for _, m := range n.members {
+			if t, i := nestedPageHeading(m.value); t != "" {
+				return t, i
+			}
+		}
+	}
+	return "", ""
 }

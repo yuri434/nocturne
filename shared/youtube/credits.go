@@ -125,3 +125,27 @@ func artistBrowseEndpoint(value any) string {
 	}
 	return ""
 }
+
+// Nocturne: retain album endpoints instead of guessing them from display text.
+func albumBrowseEndpoint(value any) string {
+	switch node := value.(type) {
+	case []any:
+		for _, child := range node {
+			if id := albumBrowseEndpoint(child); id != "" {
+				return id
+			}
+		}
+	case *jsonObject:
+		if endpoint, ok := node.get("browseEndpoint").(*jsonObject); ok {
+			if id, _ := endpoint.get("browseId").(string); isAlbumID(id) {
+				return id
+			}
+		}
+		for _, member := range node.members {
+			if id := albumBrowseEndpoint(member.value); id != "" {
+				return id
+			}
+		}
+	}
+	return ""
+}

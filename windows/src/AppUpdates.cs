@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 public sealed class AppUpdates {
- public const string Current="0.11.0";
+ public const string Current="0.11.1";
  const string Repo="https://api.github.com/repos/yuri434/yuri-music/releases/latest";
  readonly JavaScriptSerializer json=new JavaScriptSerializer{MaxJsonLength=2097152};
  bool busy;
